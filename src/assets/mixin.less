@@ -2,3 +2,21 @@
 .px2rem(@name, @px) {
   @{name}: @px / @font-ratio * 1rem;
 }
+
+.border-1px {
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: darkslategrey;
+    transform: scaleY(0.5);
+  }
+  @media (-webkit-min-device-pixel-ratio: 3) {
+    &::after {
+      transform: scaleY(0.333333333333);
+    }
+  }
+}

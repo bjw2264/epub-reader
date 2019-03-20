@@ -1,6 +1,8 @@
 <template>
   <div class="ebook-reader">
+    <ebook-title :visible="isShow"></ebook-title>
     <div id="read"></div>
+    <ebook-menu :visible="isShow"></ebook-menu>
   </div>
 </template>
 
@@ -9,7 +11,18 @@ import { mapGetters, mapActions } from 'vuex'
 import Epub from 'epubjs'
 import { SET_FILENAME } from '../../store/constants.js'
 import { baseUrl } from '../../apis'
+import EbookTitle from './EbookTitle'
+import EbookMenu from './EbookMenu'
 export default {
+  data() {
+    return {
+      isShow: false
+    }
+  },
+  components: {
+    EbookTitle,
+    EbookMenu
+  },
   mounted() {
     const { filename } = this.$route.params
     this.setFilename(filename).then(() => {
@@ -22,11 +35,15 @@ export default {
     }),
     prev() {
       this.renditiion && this.renditiion.prev()
+      this.isShow && this.toggleMenu()
     },
     next() {
       this.renditiion && this.renditiion.next()
+      this.isShow && this.toggleMenu()
     },
-    toggleMenu() {},
+    toggleMenu() {
+      this.isShow = !this.isShow
+    },
     initEpub() {
       const url = `${baseUrl}${this.filename.split('|').join('/')}.epub`
       // 初始化显示
