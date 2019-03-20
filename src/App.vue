@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="icon-A a"></div>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -8,9 +9,22 @@
   </div>
 </template>
 
+<script>
+import initRem from './utils/initRem'
+export default {
+  mounted() {
+    console.log(this)
+    this.$store.dispatch('setA',{a:1111})
+  }
+}
+initRem()
+</script>
+
 <style lang="less">
+@import './assets/mixin.less';
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Days One';
+  // font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -25,5 +39,8 @@
       color: #42b983;
     }
   }
+}
+.a {
+  .px2rem(font-size, 30);
 }
 </style>
