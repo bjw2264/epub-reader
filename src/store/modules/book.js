@@ -1,17 +1,21 @@
+import { SET_FILENAME } from '../constants'
+
 export default {
+  namespaced: true,
   state: {
-    a: 123
+    filename: ''
   },
   mutations: {
-    'SET_A': (state, payload) => {
-      console.log(payload)
-      // return {...state, ...payload}
-      state = Object.assign(state, payload)
+    [SET_FILENAME](state, payload) {
+      state.filename = payload
     }
   },
   actions: {
-    setA: ({commit}, payload) => {
-      commit('SET_A', payload)
+    [SET_FILENAME]({ commit }, payload) {
+      return commit(SET_FILENAME, payload)
     }
+  },
+  getters: {
+    filename: ({ filename }) => filename
   }
 }
