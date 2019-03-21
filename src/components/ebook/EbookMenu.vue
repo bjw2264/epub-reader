@@ -2,17 +2,29 @@
   <div class="ebook-menu" v-if="visible">
     <i class="icon icon-progress"></i>
     <i class="icon icon-bright"></i>
-    <i class="icon icon-A"></i>
+    <i class="icon icon-A" @click="changeFontSizeBarVisible"></i>
     <i class="icon icon-menu"></i>
+    <ebook-set-font-size></ebook-set-font-size>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { ebookToolMixin } from '../../utils/mixins.js'
+import EbookSetFontSize from './EbookSetFontSize'
+import { CHANGE_FONTSIZEBAR_STATUS } from '../../store/constants.js'
 export default {
   mixins: [
     ebookToolMixin
-  ]
+  ],
+  components: {
+    EbookSetFontSize
+  },
+  methods: {
+    ...mapActions('book', {
+      changeFontSizeBarVisible: CHANGE_FONTSIZEBAR_STATUS
+    })
+  }
 }
 </script>
 
